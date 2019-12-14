@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Movement : MonoBehaviour
+public class Movement : NetworkBehaviour
 {
+    [SerializeField]
     public float Speed = 5f;
     public float JumpForce = 5f;
     public bool Grounded = false;
@@ -16,7 +18,17 @@ public class Movement : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
+    //void FixedUpdate()
+    //{
+    //    if (this.isLocalPlayer)
+    //    {
+    //        float movement = Input.GetAxis("Horizontal");
+    //        GetComponent<Rigidbody2D>().velocity = new Vector2(movement * Speed, 0.0f);
+    //    }
+    //}
+
+
     void Update()
     {
         Jump();
@@ -44,7 +56,7 @@ public class Movement : MonoBehaviour
             JumpsLeft--;
         }
     }
-    
+
     void Flip()
     {
         facingRight = !facingRight;
@@ -59,7 +71,7 @@ public class Movement : MonoBehaviour
         diff.Normalize();
         float rot = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
-        if(facingRight)
+        if (facingRight)
             transform.rotation = Quaternion.Euler(0f, 0f, rot);
         else
             transform.rotation = Quaternion.Euler(0f, 0f, rot + 180);
