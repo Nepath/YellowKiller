@@ -8,6 +8,7 @@ public class MoveShip : NetworkBehaviour
 
     [SerializeField]
     private float speed;
+    bool facingRight = false;
 
     void FixedUpdate()
     {
@@ -17,4 +18,5 @@ public class MoveShip : NetworkBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(movement * speed, 0.0f);
         }
     }
+  
 }

@@ -7,7 +7,6 @@ public class Destroy_Bullet_On_Collision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"chuj {collision.gameObject.tag}");
         if (collision.gameObject.tag == "Ground") { 
         Destroy(gameObject);
     }

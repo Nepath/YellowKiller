@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Shooting : MonoBehaviour
+[System.Obsolete]
+public class Shooting : NetworkBehaviour
 {
     [SerializeField]
     private Transform gun_Shot;
@@ -23,12 +25,14 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnPointerDown();
-        OnPointerUp();
-
-        if (mouse_down==true)
+        if (this.isLocalPlayer)
         {
-            
+            OnPointerDown();
+            OnPointerUp();
+
+            if (mouse_down == true)
+            {
+
                 if (GameObject.Find("Head").GetComponent<Movement>().facingRight == true)
                 {
                     firedBullet = Instantiate(bullet, gun_Shot.position, gun_Shot.rotation);
@@ -44,8 +48,9 @@ public class Shooting : MonoBehaviour
                     Destroy(firedBullet, 50);
 
                 }
-            
-            //firedBullet.transform.position += new Vector3(Input.GetAxis("Horizontal"), 0f, 0f) * Time.deltaTime ;
+
+                //firedBullet.transform.position += new Vector3(Input.GetAxis("Horizontal"), 0f, 0f) * Time.deltaTime ;
+            }
         }
     }
     void OnPointerDown()
@@ -58,14 +63,4 @@ public class Shooting : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
             mouse_down = false;
     }
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        Destroy(firedBullet);
-    //        Debug.Log("poszlo");
-
-    //    }
-
-    //}
 }
