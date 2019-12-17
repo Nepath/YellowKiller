@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 public class Movement : NetworkBehaviour
 {
     [SerializeField]
-    public float Speed = 5f;
-    public float JumpForce = 5f;
+    public float Speed = 6f;
+    public float JumpForce = 5.5f;
     public bool Grounded = false;
     public int JumpsLeft = 2;
     public bool facingRight = false;
@@ -15,37 +15,29 @@ public class Movement : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
-
-    //Update is called once per frame
-    //void FixedUpdate()
-    //{
-    //    if (this.isLocalPlayer)
-    //    {
-    //        float movement = Input.GetAxis("Horizontal");
-    //        GetComponent<Rigidbody2D>().velocity = new Vector2(movement * Speed, 0.0f);
-    //    }
-    //}
-
 
     void Update()
     {
-        Jump();
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
-        transform.position += movement * Time.deltaTime * Speed;
-
-        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (mouse.x < transform.position.x && facingRight)
+        if (isLocalPlayer)
         {
-            Flip();
-        }
-        else if (mouse.x > transform.position.x && !facingRight)
-        {
-            Flip();
-        }
+            Jump();
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+            transform.position += movement * Time.deltaTime * Speed;
 
-        Rotate();
+            Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (mouse.x < transform.position.x && facingRight)
+            {
+                Flip();
+            }
+            else if (mouse.x > transform.position.x && !facingRight)
+            {
+                Flip();
+            }
+
+            Rotate();
+        }
     }
 
     void Jump()
