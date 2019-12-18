@@ -11,6 +11,7 @@ public class Movement : NetworkBehaviour
     public bool Grounded = false;
     public int JumpsLeft = 2;
     public bool facingRight = false;
+    
 
     // Start is called before the first frame update
     void Start()
