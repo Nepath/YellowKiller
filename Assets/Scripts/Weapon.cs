@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Weapon
 {
-    float FiringRate;
-    float Accurancy;
-    int MagSize;
-    int FiringMode; //1 - single, 2 - shotgun, 3 - fullauto
+    public float FiringRate;
+    public float Accurancy;
+    public int MagSize;
+    public int FiringMode; //1 - single, 2 - shotgun, 3 - fullauto
 
     public Weapon(float firingRate, float accurancy, int magSize, int firingMode)
     {

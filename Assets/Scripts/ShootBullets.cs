@@ -15,36 +15,48 @@ public class ShootBullets : NetworkBehaviour
 
     private float fireRate = 0.5f;
 
+    private float magSize;
+
     private int tryb =2; //1=pistolet 2= shotgun 3= karabin
 
+    Weapon weapon;
+
     float nextFire;
-    
+
+
+
     void Update()
     {
         if (this.isLocalPlayer)
         {
+            if (magSize < 1)
+            {
+                this.GetComponent<WeaponChange>().CurrentWeapon = 0;
+            }
+            weapon = this.GetComponent<WeaponChange>().GetWeapon;
+            tryb = weapon.FiringMode;
+            magSize = weapon.MagSize;
+            fireRate = weapon.FiringRate;
             OnPointerDown();
             OnPointerUp();
-            if (mouse_down == true && Time.time > nextFire)
+            if (mouse_down == true && Time.time > nextFire && magSize > 0)
             {
                 if (tryb == 1)
                 {
-                    fireRate = 0.5f;
                     nextFire = Time.time + fireRate;
                     CmdShoot();
                 }
                 else if (tryb == 2)
                 {
-                    fireRate = 1f;
                     nextFire = Time.time + fireRate;
                     CmdShootShotgun();
                 }
                 else if (tryb == 3)
                 {
-                    fireRate = 0.1f;
                     nextFire = Time.time + fireRate;
                     CmdShootRifle();
                 }
+                weapon.MagSize -= 1;
 
             }
         }
@@ -52,7 +64,10 @@ public class ShootBullets : NetworkBehaviour
     [Command]
     void CmdShoot()
     {
+        var number = Random.Range(-weapon.Accurancy, weapon.Accurancy);
         Vector2 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        diff.x += number;
+        diff.y += number;
         diff.Normalize();
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
@@ -62,31 +77,38 @@ public class ShootBullets : NetworkBehaviour
     [Command]
     void CmdShootShotgun()
     {
+        var number = Random.Range(-weapon.Accurancy, weapon.Accurancy);
         Vector2 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        diff.x += number;
+        diff.y += number;
         diff.Normalize();
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
         diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        diff.x += 1;
-        diff.y += 1;
+        number = Random.Range(-weapon.Accurancy, weapon.Accurancy);
+        diff.x += number;
+        diff.y += number;
         diff.Normalize();
         GameObject bullet1 = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet1.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
         diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        diff.x -= 1;
-        diff.y -= 1;
+        number = Random.Range(-weapon.Accurancy, weapon.Accurancy);
+        diff.x += number;
+        diff.y += number;
         diff.Normalize();
         GameObject bullet2 = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet2.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
         diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        diff.x += 0.5f;
-        diff.y += 0.5f;
+        number = Random.Range(-weapon.Accurancy, weapon.Accurancy);
+        diff.x += number;
+        diff.y += number;
         diff.Normalize();
         GameObject bullet3 = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet3.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
         diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        diff.x -= 0.5f;
-        diff.y -= 0.5f;
+        number = Random.Range(-weapon.Accurancy, weapon.Accurancy);
+        diff.x += number;
+        diff.y += number;
         diff.Normalize();
         GameObject bullet4 = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet4.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
@@ -105,12 +127,11 @@ public class ShootBullets : NetworkBehaviour
     [Command]
     void CmdShootRifle()
     {
-        var number = Random.Range(-50, 50);
-        float recoilNumber = number / 35;
+        var number = Random.Range(-weapon.Accurancy, weapon.Accurancy);
         Debug.Log(number);
         Vector2 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        diff.x += recoilNumber;
-        diff.y += recoilNumber;
+        diff.x += number;
+        diff.y += number;
         diff.Normalize();
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;

@@ -20,7 +20,7 @@ public class Crate : NetworkBehaviour
             if (!taken)
             {
                 taken = true;
-                int r = Random.Range(0, WeaponChange.weaponsAmount);
+                int r = Random.Range(1, WeaponChange.weaponsAmount);
                 collision.gameObject.GetComponent<WeaponChange>().CurrentWeapon = r;
                 CmdPickUp();
             }

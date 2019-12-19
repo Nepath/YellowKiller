@@ -25,14 +25,24 @@ public class WeaponChange : NetworkBehaviour
             return weaponNumber;
         }
     }
+    public Weapon GetWeapon
+    {
+        get
+        {
+            return WeaponTypes[weaponNumber];
+        }
+    }
+
+
 
     void Start()
     {
-        Weapon Pistol = new Weapon(3, 2, 12, 1); //pistol
-        Weapon MachineGun = new Weapon(1, 3, 30, 3); //machine gun
-        Weapon Shotgun = new Weapon(8, 8, 6, 2); //shotgun
+        Weapon Pistol = new Weapon(0.5f, 0.4f, 9999, 1); //pistol
+        Weapon MachineGun = new Weapon(0.1f, 1.7f, 30, 3); //machine gun
+        Weapon Shotgun = new Weapon(1, 2, 6, 2); //shotgun
+        Weapon SniperRifle = new Weapon(1.2f, 0.2f, 6, 1);//sniperRifle
 
-        WeaponTypes = new Weapon[] { Pistol, MachineGun, Shotgun };
+        WeaponTypes = new Weapon[] { Pistol, MachineGun, Shotgun, SniperRifle };
         weaponsAmount = WeaponTypes.Length;
         CurrentWeapon = 0;
     }
