@@ -25,6 +25,7 @@ public class Movement : NetworkBehaviour
         {
             Jump();
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+
             transform.position += movement * Time.deltaTime * Speed;
 
             Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
