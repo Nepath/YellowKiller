@@ -98,11 +98,8 @@ GameObject:
   - component: {fileID: 7357100787732252831}
   - component: {fileID: 3185229193988357595}
   - component: {fileID: 4990983068089216677}
-<<<<<<< HEAD
   - component: {fileID: 5124062968574380393}
-=======
-  - component: {fileID: 8587201779558049317}
->>>>>>> refs/remotes/origin/master
+  - component: {fileID: -5122023054778922352}
   m_Layer: 0
   m_Name: Head
   m_TagString: Player
@@ -212,7 +209,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &545082610811403895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,24 +314,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7188718057976797761, guid: a816abd1608735640a567d5e276b35a4,
     type: 3}
   bulletSpeed: 5
-<<<<<<< HEAD
   m4a1_Sound: {fileID: 8300000, guid: cabd37698777a894a88fedc1035f17ab, type: 3}
   pistol_Sound: {fileID: 8300000, guid: 4aa2af8e4861f82438c1914c20000159, type: 3}
   snipe_Sound: {fileID: 8300000, guid: b8e8d88a77823ab40ba7c0f43dd9d2ca, type: 3}
   shotgun_sound: {fileID: 8300000, guid: 1acb893649be369489c2fb6eb84f2850, type: 3}
 --- !u!82 &5124062968574380393
 AudioSource:
-=======
---- !u!114 &8587201779558049317
-MonoBehaviour:
->>>>>>> refs/remotes/origin/master
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3271198475319420208}
   m_Enabled: 1
-<<<<<<< HEAD
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -423,12 +414,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-=======
+--- !u!114 &-5122023054778922352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271198475319420208}
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b421d60174bfa3488e93f648467db27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
->>>>>>> refs/remotes/origin/master
 --- !u!1 &3982232253016546969
 GameObject:
   m_ObjectHideFlags: 0
