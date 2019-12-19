@@ -39,10 +39,11 @@ public class WeaponChange : NetworkBehaviour
 
     void Start()
     {
-        Weapon Pistol = new Weapon(0.5f, 0.13f, 9999, 1); //pistol        0.26 is 30 degrees
-        Weapon MachineGun = new Weapon(0.1f, 0.2f, 30, 3); //machine gun
-        Weapon Shotgun = new Weapon(1, 0.25f, 6, 2); //shotgun
-        Weapon SniperRifle = new Weapon(1.2f, 0.05f, 6, 1); //sniperRifle
+        //firing rate, accurancy (0.26 is +-30 degrees), mag size, firing mode (1 - single, 2 - shotgun, 3 - fullauto), dmg
+        Weapon Pistol = new Weapon(0.5f, 0.13f, 9999, 1, 12); //pistol
+        Weapon MachineGun = new Weapon(0.1f, 0.2f, 30, 3, 10); //machine gun
+        Weapon Shotgun = new Weapon(1, 0.25f, 6, 2, 15); //shotgun
+        Weapon SniperRifle = new Weapon(1.2f, 0.02f, 6, 1, 85); //sniper rifle
 
         WeaponTypes = new Weapon[] { Pistol, MachineGun, Shotgun, SniperRifle };
         weaponsAmount = WeaponTypes.Length;
