@@ -18,10 +18,25 @@ public class ShootBullets : NetworkBehaviour
     private float magSize;
 
     private int tryb = 2; //1=pistolet 2= shotgun 3= karabin
+    AudioSource asource;
+
+    [SerializeField]
+    AudioClip m4a1_Sound;
+    [SerializeField]
+    AudioClip pistol_Sound;
+    [SerializeField]
+    AudioClip snipe_Sound;
+    [SerializeField]
+    AudioClip shotgun_sound;
 
     Weapon weapon;
 
     float nextFire;
+
+    private void Start()
+    {
+        asource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -38,16 +53,26 @@ public class ShootBullets : NetworkBehaviour
             {
                 if (tryb == 1)
                 {
+                    if (GetComponent<WeaponChange>().CurrentWeapon == 0)
+                    {
+                        asource.PlayOneShot(pistol_Sound);
+                    }
+                    else
+                    {
+                        asource.PlayOneShot(snipe_Sound);
+                    }
                     nextFire = Time.time + fireRate;
                     CmdShoot();
                 }
                 else if (tryb == 2)
                 {
+                    asource.PlayOneShot(shotgun_sound);
                     nextFire = Time.time + fireRate;
                     CmdShootShotgun();
                 }
                 else if (tryb == 3)
                 {
+                    asource.PlayOneShot(m4a1_Sound);
                     nextFire = Time.time + fireRate;
                     CmdShootRifle();
                 }
