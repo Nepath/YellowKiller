@@ -21,6 +21,7 @@ public class Movement : NetworkBehaviour
 
     void Update()
     {
+
         if (isLocalPlayer)
         {
             Jump();
@@ -40,6 +41,11 @@ public class Movement : NetworkBehaviour
 
             Rotate();
         }
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        Camera.main.GetComponent<CameraFollow>().setTarget(gameObject.transform);
     }
 
     void Jump()
@@ -71,4 +77,5 @@ public class Movement : NetworkBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, rot + 180);
     }
 
+    
 }
