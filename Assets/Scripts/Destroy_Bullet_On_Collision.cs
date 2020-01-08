@@ -20,10 +20,13 @@ public class Destroy_Bullet_On_Collision : NetworkBehaviour
             GameObject bullet = Instantiate(groundDestroyer, position, Quaternion.identity);
             NetworkServer.Spawn(bullet);
             Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "Player")
+        {
+            int dmg = collision.gameObject.GetComponent<WeaponChange>().GetWeapon.Damage;
+            collision.gameObject.GetComponent<PlayerAtributes>().DealDamage(dmg);
+        }
     }
-    }
-    // Start is called before the first frame update
-
 }
 
 

@@ -7,7 +7,7 @@ public class WeaponChange : NetworkBehaviour
 {
     private int weaponNumber;
     static public int weaponsAmount;
-    public Sprite[] Weapons;
+    public GameObject[] Weapons;
 
     Weapon[] WeaponTypes;
     public int CurrentWeapon
@@ -35,6 +35,14 @@ public class WeaponChange : NetworkBehaviour
         }
     }
 
+    public Vector3 GetBarrelPosition
+    {
+        get
+        {
+            return Weapons[weaponNumber].transform.GetChild(0).transform.position;
+        }
+    }
+
 
 
     void Start()
@@ -51,9 +59,14 @@ public class WeaponChange : NetworkBehaviour
     }
 
     [Command]
-    void CmdWeaponOnChange(int i)
+    void CmdWeaponOnChange(int num)
     {
-        Transform children = this.transform.Find("Gun");
-        children.GetComponent<SpriteRenderer>().sprite = Weapons[i];
+        for(int i = 0; i < weaponsAmount; i++)
+        {
+            if (i == num)
+                Weapons[i].SetActive(true);
+            else
+                Weapons[i].SetActive(false);
+        }
     }
 }

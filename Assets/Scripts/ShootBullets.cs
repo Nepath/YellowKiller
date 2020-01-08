@@ -33,6 +33,14 @@ public class ShootBullets : NetworkBehaviour
 
     float nextFire;
 
+    Vector3 BarrelPosition
+    {
+        get
+        {
+            return transform.GetComponent<WeaponChange>().GetBarrelPosition;
+        }
+    }
+
     private void Start()
     {
         asource = GetComponent<AudioSource>();
@@ -86,11 +94,12 @@ public class ShootBullets : NetworkBehaviour
     void CmdShoot()
     {
         Vector2 diff = Accurancy();
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, BarrelPosition, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
         NetworkServer.Spawn(bullet);
         Destroy(bullet, 5.0f);
     }
+
     [Command]
     void CmdShootShotgun()
     {
@@ -100,7 +109,7 @@ public class ShootBullets : NetworkBehaviour
         {
             diff = Accurancy();
 
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, BarrelPosition, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
 
             NetworkServer.Spawn(bullet);
@@ -112,7 +121,7 @@ public class ShootBullets : NetworkBehaviour
     void CmdShootRifle()
     {
         Vector2 diff = Accurancy();
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, BarrelPosition, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = diff * bulletSpeed;
         NetworkServer.Spawn(bullet);
         Destroy(bullet, 5.0f);
@@ -139,7 +148,7 @@ public class ShootBullets : NetworkBehaviour
 
     Vector2 Accurancy()
     {
-        Vector2 player = transform.position;
+        Vector2 player = transform.position;//new Vector2(transform.GetComponent<WeaponChange>().GetBarrelPosition.x, transform.GetComponent<WeaponChange>().GetBarrelPosition.y);
         Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         float a = mouse.y - player.y;

@@ -7,6 +7,9 @@ public class PlayerAtributes : MonoBehaviour
     int health;
     float speed;
     float jumpForce;
+    int deaths = 0;
+
+    public GameObject Respawner;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +22,7 @@ public class PlayerAtributes : MonoBehaviour
         this.GetComponent<Movement>().JumpForce = jumpForce;
     }
 
-    void DealDamage(int x)
+    public void DealDamage(int x)
     {
         health -= x;
         if(health <= 0)
@@ -28,12 +31,12 @@ public class PlayerAtributes : MonoBehaviour
         }
     }
 
-    void AdjustSpeed(float x)
+    public void AdjustSpeed(float x)
     {
         speed += x;
         this.GetComponent<Movement>().Speed = speed;
     }
-    void AdjustJump(float x)
+    public void AdjustJump(float x)
     {
         jumpForce += x;
         this.GetComponent<Movement>().JumpForce = jumpForce;
@@ -41,6 +44,9 @@ public class PlayerAtributes : MonoBehaviour
 
     void Death()
     {
-        Debug.LogError(this.ToString() + " died");
+        Vector3 pos = Respawner.GetComponent<CreateRespawn>().GetRandomRespawn();
+        health = 100;
+        deaths++;
+        transform.position = pos;
     }
 }
