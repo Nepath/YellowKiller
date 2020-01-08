@@ -7,13 +7,15 @@ public class MainMenuController : MonoBehaviour{
 
     public GameObject MainMenu;
     public GameObject Credits;
+    public GameObject Options;
 
     public void playGame() {
         SceneManager.LoadScene("SampleScene");
     }
  
     public void options() {
-        
+        MainMenu.SetActive(false);
+        Options.SetActive(true);
     }
 	
 	public void creditcard() {
