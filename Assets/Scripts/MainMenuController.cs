@@ -26,6 +26,7 @@ public class MainMenuController : MonoBehaviour{
 	public void back() {
 		MainMenu.SetActive(true);
 		Credits.SetActive(false);
+		Options.SetActive(false);
     }
  
     public void exitGame() {
