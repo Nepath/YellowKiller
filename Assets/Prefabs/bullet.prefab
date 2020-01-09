@@ -192,3 +192,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundDestroyer: {fileID: 5048986798634125411, guid: 7015a74a7d51ab74e96caef51356bcaf,
     type: 3}
+  playerDestroyer: {fileID: 6823330618380341000, guid: dc82f62da074f5b46a9b92f74301a0aa,
+    type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAtributes : MonoBehaviour
 {
-    int health;
+    public int health;
     float speed;
     float jumpForce;
     int deaths = 0;

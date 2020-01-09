@@ -11,11 +11,13 @@ public class ShootBullets : NetworkBehaviour
     [SerializeField]
     private float bulletSpeed;
 
-    private bool mouse_down = false;
+    public bool mouse_down = false;
 
     private float fireRate = 0.5f;
 
-    private float magSize;
+    public float magSize;
+
+    public bool GameOverCheck;
 
     private int tryb = 2; //1=pistolet 2= shotgun 3= karabin
     AudioSource asource;
@@ -43,6 +45,7 @@ public class ShootBullets : NetworkBehaviour
 
     private void Start()
     {
+        GameOverCheck = false;
         asource = GetComponent<AudioSource>();
     }
 
@@ -50,42 +53,45 @@ public class ShootBullets : NetworkBehaviour
     {
         if (this.isLocalPlayer)
         {
-            if (magSize < 1)
+            if (GameOverCheck == false)
             {
-                this.GetComponent<WeaponChange>().CurrentWeapon = 0;
-            }
+                if (magSize < 1)
+                {
+                    this.GetComponent<WeaponChange>().CurrentWeapon = 0;
+                }
 
-            OnPointerDown();
-            OnPointerUp();
-            if (mouse_down == true && Time.time > nextFire && magSize > 0)
-            {
-                if (tryb == 1)
+                OnPointerDown();
+                OnPointerUp();
+                if (mouse_down == true && Time.time > nextFire && magSize > 0)
                 {
-                    if (GetComponent<WeaponChange>().CurrentWeapon == 0)
+                    if (tryb == 1)
                     {
-                        asource.PlayOneShot(pistol_Sound);
+                        if (GetComponent<WeaponChange>().CurrentWeapon == 0)
+                        {
+                            asource.PlayOneShot(pistol_Sound);
+                        }
+                        else
+                        {
+                            asource.PlayOneShot(snipe_Sound);
+                        }
+                        nextFire = Time.time + fireRate;
+                        CmdShoot();
                     }
-                    else
+                    else if (tryb == 2)
                     {
-                        asource.PlayOneShot(snipe_Sound);
+                        asource.PlayOneShot(shotgun_sound);
+                        nextFire = Time.time + fireRate;
+                        CmdShootShotgun();
                     }
-                    nextFire = Time.time + fireRate;
-                    CmdShoot();
-                }
-                else if (tryb == 2)
-                {
-                    asource.PlayOneShot(shotgun_sound);
-                    nextFire = Time.time + fireRate;
-                    CmdShootShotgun();
-                }
-                else if (tryb == 3)
-                {
-                    asource.PlayOneShot(m4a1_Sound);
-                    nextFire = Time.time + fireRate;
-                    CmdShootRifle();
-                }
-                magSize -= 1;
+                    else if (tryb == 3)
+                    {
+                        asource.PlayOneShot(m4a1_Sound);
+                        nextFire = Time.time + fireRate;
+                        CmdShootRifle();
+                    }
+                    magSize -= 1;
 
+                }
             }
         }
     }
